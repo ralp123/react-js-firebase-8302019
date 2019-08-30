@@ -7,7 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Img from 'react-image';
 import { loadData, loadDetails, Click, LoadD } from './DataModels';
-import { getUSers1 } from './HomeTest';
+import { getUsers } from './DataModels1';
 const axios = require('axios');
 
 
@@ -25,6 +25,12 @@ class Home extends Component {
 	componentDidMount(){
 		console.log('componentDidMount');
 		this.postD();
+
+		let id = 2
+		getUsers(id)
+         	.then((res) => {
+				console.log(res.data);
+		})
 	}
 
 	componentDidUpdate(){
@@ -43,11 +49,10 @@ class Home extends Component {
 				});
 			}
 		})
-		.catch(function (error) {
-			// handle error
+		.catch(error => {
 			console.log(error);
 		})
-		.finally(function (val) {
+		.finally(val => {
 			//always executed
 			//console.log(val);
 		});
@@ -64,7 +69,6 @@ class Home extends Component {
 			tableDetail = <div class="spinner-border"></div>;
 		}else{
 			tableDetail = Object.keys(postDetails).map((i) => (
-				
 				<div className="post-padding-bottom-25" key={i}>
 					<h2>{ postDetails[i].title }</h2>
 					<h5>{ postDetails[i].author }, { postDetails[i].date }</h5>
@@ -85,11 +89,11 @@ class Home extends Component {
 		let tableDetail = this.tableDetail();
 		let test123;
 		//console.log(getUSers1);
-		test123 = getUSers1.then(response => {
+		//test123 = getUSers1.then(response => {
 			
 			//working code//
 			//console.log(response.status);
-		})
+		//})
 		// let test123 = [
 		// 	{title : 1},{2},{3}
 		// ]
